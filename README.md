@@ -1,54 +1,56 @@
-# github-repo-data-collector
+# GitHub Repo Age Analyzer
 
-Este script em Python permite monitorar a quantidade de commits e releases em repositórios do GitHub em um determinado mês e ano. Os dados coletados são salvos em um arquivo CSV para fácil análise.
+Este projeto consiste em um script Python que calcula o tempo de existência de repositórios do GitHub em meses, desde sua data de criação até um mês e ano fornecidos. O objetivo é permitir a comparação da maturidade entre diferentes projetos ao longo do tempo. Os resultados são salvos em um arquivo CSV.
 
-## :computer: Como Funciona
+## Funcionalidades
 
-- **Autenticação**: O script utiliza um token de autenticação do GitHub para acessar a API. Você deve substituir o valor da variável `GITHUB_TOKEN` pelo seu próprio token.
+- Calcula a idade de repositórios em meses, a partir da data de criação até uma data específica.
+- Verifica se a data fornecida é anterior à criação do repositório e exibe uma mensagem de erro apropriada.
+- Salva os resultados em um arquivo CSV com o nome do repositório, a data de criação e a idade em meses.
 
-- **Lista de Repositórios**: O script possui uma lista predefinida de repositórios a serem monitorados. Você pode adicionar ou remover repositórios nessa lista para personalizar a monitoração.
+## Como Usar
 
-### Coleta de Dados:
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/github-repo-age-analyzer.git
+    ```
 
-1. O usuário insere um mês e um ano.
-2. O script obtém a data de lançamento de cada repositório.
-3. Se o repositório foi criado antes do mês e ano solicitados, ele coleta:
-   - **Commits**: O número de commits realizados entre a data de lançamento e o final do mês especificado.
-   - **Releases**: O número de releases publicadas no mesmo período.
-4. **Salvar Dados**: Os dados são salvos em um arquivo CSV chamado `dados_commits_releases.csv`.
+2. Instale as dependências necessárias:
+    ```bash
+    pip install requests
+    ```
 
-## :gear: Requisitos
+3. Substitua o token do GitHub no script:
+    No arquivo principal, substitua o valor da variável `token` com seu [token pessoal do GitHub](https://github.com/settings/tokens), que é necessário para acessar a API do GitHub.
 
-- Python 3.x
-- Biblioteca `requests`
-- Biblioteca `csv` (incluída por padrão no Python)
+4. Execute o script:
+    ```bash
+    python script.py
+    ```
 
-## :rocket: Como Usar
+5. **Insira o ano e mês finais quando solicitado**: Durante a execução do script, você será solicitado a inserir o ano e o mês finais para o cálculo da idade dos repositórios.
 
-1. Clone o repositório ou copie o código para um arquivo Python (ex: `monitor.py`).
+## Configurando o Token do GitHub
 
-2. Instale a biblioteca `requests`, se ainda não estiver instalada:
+Para que o script funcione corretamente, você precisará fornecer um token pessoal do GitHub. Esse token deve ter permissões de leitura para repositórios públicos (e, se necessário, privados). Veja os passos para gerar o token:
+
+1. Vá até as [configurações de tokens pessoais do GitHub](https://github.com/settings/tokens).
+2. Clique em "Generate new token" e selecione as permissões necessárias.
+3. Copie o token e cole no lugar da variável `token` no script.
+
+## Exemplo de Saída
+
+Após a execução do script, um arquivo CSV será gerado, contendo os seguintes dados:
 
    ```bash
-   pip install requests
-Abra o arquivo Python e substitua o valor de GITHUB_TOKEN pelo seu token de autenticação do GitHub.
-Para acessar repositórios privados e públicos, siga estas etapas:
-
-1. Acesse GitHub.
-2. Vá para Configurações (Settings) > Desenvolvedor (Developer settings) > Tokens de acesso pessoal (Personal access tokens).
-3. Clique em Gerar novo token (Generate new token).
-4. Adicione uma descrição para o token e selecione as permissões necessárias:
-    - **repo** (acesso completo a repositórios privados e públicos).
-5. Após criar o token, copie-o e cole na variável GITHUB_TOKEN no seu script.
-6. Salve o arquivo e execute o script como descrito na seção Como Usar.
-  
-**O arquivo CSV gerado terá a seguinte estrutura:**
-    
-   ```bash
-Repositório,Commits,Releases
-hyperledger-labs/fablo,30,9
-hyperledger-labs/fabric-operator,30,18.
+Repositório,Data de Criação,Idade em Meses
+hyperledger-labs/fablo,2019-11-29T11:01:59Z,59
+hyperledger-labs/fabric-operator,2022-06-07T18:16:42Z,28
+hyperledger-labs/ansible-collection,2023-02-21T16:43:19Z,20
 ...
 ```
 
-A API do GitHub tem limites de taxa, então evite executar o script muitas vezes em um curto período. Se algum repositório não for encontrado, o script exibirá um erro apropriado.
+## Observações
+
+- Se a data final fornecida for anterior à criação do repositório, o script exibirá uma mensagem de erro.
+- Repositórios com menos de um mês serão registrados como "0" no campo "Idade em Meses".
