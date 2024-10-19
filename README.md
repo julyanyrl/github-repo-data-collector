@@ -37,7 +37,7 @@ Este projeto consiste em três scripts Python:
    pip install requests
 ```
 
-3. Substitua o token do GitHub nos scripts: No arquivo **coletor_github.py**, **repository.age.calculator.py** e **active_branches_collector.py**, substitua o valor da variável ```token``` pelo seu token pessoal do GitHub, que é necessário para acessar a API do GitHub.
+3. Substitua o token do GitHub nos scripts: No arquivo **coletor_github.py**, **repository_age_calculator.py** e **active_branches_collector.py**, substitua o valor da variável ```token``` pelo seu token pessoal do GitHub, que é necessário para acessar a API do GitHub.
 
 4. Execute o script de monitoramento:
   ```bash
