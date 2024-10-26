@@ -1,10 +1,11 @@
 # github-repo-data-collector
 
-Este projeto consiste em três scripts Python:
+Este projeto consiste em quatro scripts Python:
 
 1. **coletor_github.py**: Monitora o número de commits e releases em repositórios do GitHub, permitindo analisar a atividade de desenvolvimento.
 2. **repository_age_calculator.py**: Calcula o tempo de existência de repositórios do GitHub em meses, desde a data de criação até um mês e ano fornecidos. O objetivo é permitir a comparação da maturidade entre diferentes projetos ao longo do tempo. Os resultados são salvos em arquivos CSV.
 3. **active_branches_collector.py**: Recupera a quantidade de branches ativas em repositórios do GitHub até uma data específica, fornecendo uma métrica da atividade de desenvolvimento e do interesse em novas funcionalidades. Os resultados também são salvos em um arquivo CSV.
+4. **pull_requests_analyzer.py**: Analisa o nível de colaboração em projetos do GitHub, registrando a quantidade de Pull Requests abertos, o tempo médio sem resposta e o número de PRs aceitos e rejeitados até uma data específica.
 
 ## Funcionalidades
 
@@ -26,6 +27,11 @@ Este projeto consiste em três scripts Python:
 - Ignora branches criadas após a data especificada.
 - Salva os resultados em um arquivo CSV com o nome do repositório e a contagem de branches ativas.
 
+### Análise de Pull Requests
+
+- Coleta informações sobre Pull Requests abertos, calculando o tempo médio sem resposta e o número de PRs aceitos ou rejeitados até uma data específica.
+- Salva os resultados em um arquivo CSV com o nome do repositório, quantidade de PRs abertos, tempo médio sem resposta (em dias), PRs aceitos e PRs rejeitados.
+
 ## Como Usar
 
 1. Clone o repositório:
@@ -37,7 +43,7 @@ Este projeto consiste em três scripts Python:
    pip install requests
 ```
 
-3. Substitua o token do GitHub nos scripts: No arquivo **coletor_github.py**, **repository_age_calculator.py** e **active_branches_collector.py**, substitua o valor da variável ```token``` pelo seu token pessoal do GitHub, que é necessário para acessar a API do GitHub.
+3. Substitua o token do GitHub nos scripts: No arquivo **coletor_github.py**, **repository_age_calculator.py**, **active_branches_collector.py** e **pull_requests_analyzer.py**, substitua o valor da variável ```token``` pelo seu token pessoal do GitHub, que é necessário para acessar a API do GitHub.
 
 4. Execute o script de monitoramento:
   ```bash
@@ -56,6 +62,13 @@ python repository.age.calculator.py
 python active_branches_collector.py
 ```
 *Durante a execução, você será solicitado a inserir a data limite (AAAA-MM-DD) para contar as branches ativas.*
+
+7. Execute o script para análise de Pull Requests:
+
+  ```bash
+python pull_requests_analyzer.py
+```
+*Durante a execução de cada script, você será solicitado a inserir a data limite no formato adequado para a busca de dados.*
 
 ### Configurando o Token do GitHub
 
@@ -95,6 +108,16 @@ hyperledger-labs/ansible-collection,4
 ...
 ```
 
+4. pull_requests.csv:
+  ```bash
+Repositório,Quantidade PRs Abertos,Tempo Médio Sem Resposta (dias),PRs Aceitos,PRs Rejeitados
+hyperledger-labs/fablo,1,25.0,27,2
+hyperledger-labs/fabric-operator,5,172.2,22,3
+hyperledger-labs/ansible-collection,0,0,25,5
+...
+```
+
 ## Observações
 - Se a data final fornecida for anterior à criação do repositório, o script exibirá uma mensagem de erro.
 - Repositórios com menos de um mês serão registrados como "0" no campo "Idade em Meses".
+- Para obter o tempo médio sem resposta de PRs, são considerados apenas PRs abertos sem comentários.
