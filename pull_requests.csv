@@ -1,0 +1,14 @@
+Repositório,Quantidade PRs Abertos,Tempo Médio Sem Resposta (dias),PRs Aceitos,PRs Rejeitados
+hyperledger-labs/fablo,1,25.0,27,2
+hyperledger-labs/fabric-operator,5,172.2,22,3
+hyperledger-labs/ansible-collection,0,0,25,5
+hyperledger/fabric-samples,4,41.0,20,6
+hyperledger/fabric-test,13,574.6923076923077,15,2
+hyperledger/bevel,0,0,28,1
+hyperledger/indy-node-container,1,150.0,26,3
+bcgov/von-network,7,179.57142857142858,14,9
+hyperledger-labs/minifabric,0,0,18,12
+hyperledger-labs/besu-operator,0,0,3,0
+hyperledger-labs/nephos,0,0,3,27
+hyperledger-labs/microfab,3,276.0,21,6
+Consensys/quorum,13,161.46153846153845,10,7
