@@ -1,0 +1,14 @@
+Repositório,Ferramentas de CI/CD Integradas
+hyperledger-labs/fablo,GitHub Actions
+hyperledger-labs/fabric-operator,GitHub Actions
+hyperledger-labs/ansible-collection,GitHub Actions
+hyperledger/fabric-samples,GitHub Actions
+hyperledger/fabric-test,GitHub Actions
+hyperledger/bevel,GitHub Actions
+hyperledger/indy-node-container,GitHub Actions
+bcgov/von-network,GitHub Actions
+hyperledger-labs/minifabric,GitHub Actions
+hyperledger-labs/besu-operator,Nenhuma Integração
+hyperledger-labs/nephos,Travis CI
+hyperledger-labs/microfab,GitHub Actions
+Consensys/quorum,Travis CI
