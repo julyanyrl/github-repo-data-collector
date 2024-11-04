@@ -1,27 +1,8 @@
 import requests
-import csv
 from datetime import datetime
 
-GITHUB_TOKEN = 'seu_token'
-HEADERS = {'Authorization': f'token {GITHUB_TOKEN}'}
-
-repositorios = [
-    'hyperledger-labs/fablo',
-    'hyperledger-labs/fabric-operator',
-    'hyperledger-labs/ansible-collection',
-    'hyperledger/fabric-samples',
-    'hyperledger/fabric-test',
-    'hyperledger/bevel',
-    'hyperledger/indy-node-container',
-    'bcgov/von-network',
-    'hyperledger-labs/minifabric',
-    'hyperledger-labs/besu-operator',
-    'hyperledger-labs/nephos',
-    'hyperledger-labs/microfab',
-    'Consensys/quorum'
-]
-
-def get_pr_statistics(repo, date_limit):
+def get_pr_statistics(repo, date_limit, github_token):
+    headers = {'Authorization': f'token {github_token}'}
     open_prs = 0
     total_no_response_time = 0
     accepted_prs = 0
@@ -30,7 +11,7 @@ def get_pr_statistics(repo, date_limit):
 
     while True:
         url = f'https://api.github.com/repos/{repo}/pulls?state=all&per_page=100&page={page}'
-        response = requests.get(url, headers=HEADERS)
+        response = requests.get(url, headers=headers)
         
         if response.status_code != 200:
             print(f"Erro ao recuperar PRs do repositório {repo}: {response.status_code}")
@@ -64,15 +45,16 @@ def get_pr_statistics(repo, date_limit):
     
     return open_prs, avg_no_response_time, accepted_prs, rejected_prs
 
-data_input = input("Digite a data limite para a busca (formato: AAAA-MM-DD): ")
-data_limite = datetime.strptime(data_input, "%Y-%m-%d")
-
-with open('pull_requests.csv', mode='w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(['Repositório', 'Quantidade PRs Abertos', 'Tempo Médio Sem Resposta (dias)', 'PRs Aceitos', 'PRs Rejeitados'])
-
+def main(repositorios, data_limite, github_token):
+    dados_gerais = []
     for repo in repositorios:
-        open_prs, avg_no_response_time, accepted_prs, rejected_prs = get_pr_statistics(repo, data_limite)
-        writer.writerow([repo, open_prs, avg_no_response_time, accepted_prs, rejected_prs])
-
-print("CSV atualizado com sucesso.")
+        open_prs, avg_no_response_time, accepted_prs, rejected_prs = get_pr_statistics(repo, data_limite, github_token)
+        dados_gerais.append({
+            'Repositório': repo,
+            'Quantidade PRs Abertos': open_prs,
+            'Tempo Médio Sem Resposta (dias)': avg_no_response_time,
+            'PRs Aceitos': accepted_prs,
+            'PRs Rejeitados': rejected_prs
+        })
+    
+    return dados_gerais
