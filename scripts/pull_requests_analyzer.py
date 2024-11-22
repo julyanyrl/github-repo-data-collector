@@ -25,7 +25,7 @@ def get_pr_statistics(repo, date_limit, github_token):
 
             if pr['state'] == 'open':
                 open_prs += 1
-                comments = requests.get(pr['comments_url'], headers=headers).json()
+                comments = requests.get(pr['review_comments_url'], headers=headers).json()
                 no_response_time = (
                     (datetime.strptime(comments[0]['created_at'], "%Y-%m-%dT%H:%M:%SZ") - pr_date).days
                     if comments else (date_limit - pr_date).days
