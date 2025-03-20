@@ -89,5 +89,5 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 ## Contato
 
 Para dúvidas ou sugestões, entre em contato:
-- Email: seu-email@example.com
-- GitHub: [SeuUsuário](https://github.com/SeuUsuário)
+- Email: julyanylisboa12@gmail.com
+- GitHub: [julyanyrl](https://github.com/julyanyrl).
